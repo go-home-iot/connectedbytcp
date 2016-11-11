@@ -69,6 +69,11 @@ func Scan(waitTimeSeconds int) ([]ScanResponse, error) {
 // this function without first pressing the sync button will cause a
 // ErrUnauthorized error to be returned.  The address field should be in the
 // format "https://192.168.0.23" for example.
+//
+// IMPORTANT: It seems that every time you get a token the previous token becomes invalid,
+// so you will need to update wherever you are using it after calling this function.  Also
+// the official app also generates tokens if you scan so things may stop working if you use 
+// the official app after getting these tokens, if so then you will need to generate a new one
 func GetToken(address string) (string, error) {
 	id, err := uuid.NewV4()
 	if err != nil {
